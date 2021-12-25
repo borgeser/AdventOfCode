@@ -141,7 +141,7 @@ function reduce_node!(node)
 end
 
 function add(left, right)
-	node = Node(left, right)
+	node = deepcopy(Node(left, right))
 	reduce_node!(node)
 	return node
 end
@@ -164,3 +164,6 @@ end
 
 lines = readlines("input.txt") .|> parse_node
 add_all(lines) |> magnitude |> println
+
+part2(lines) = maximum([magnitude(add(l1, l2)) for l1 in lines for l2 in lines if l1 != l2])
+part2(lines) |> println
